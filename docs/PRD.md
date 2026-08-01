@@ -161,12 +161,12 @@ Mapped to the monorepo that already exists in this repo:
 
 | Requirement | Where it lives | Notes |
 |---|---|---|
-| Web UI (MVP platform) | `apps/web` (Next.js) | Chosen as the first platform — fastest to iterate, no app store review |
-| API | `apps/api` (Express + Prisma) | Needs new endpoints: create session, list sessions, get stat history |
-| Database | Postgres via Prisma (`apps/api/prisma/schema.prisma`) | Needs a `Session` model (and later a `StatEntry` model) linked to the existing `User` model |
-| Shared types | `packages/shared` | `Session`/stat types should live here so web and api agree on shape, same pattern as the existing `User` type |
+| Frontend (MVP platform) | `apps/frontend` (Next.js) | Chosen as the first platform — fastest to iterate, no app store review |
+| Backend | `apps/backend` (Express + Prisma) | Needs new endpoints: create session, list sessions, get stat history |
+| Database | Postgres via Prisma (`apps/backend/prisma/schema.prisma`) | Needs a `Session` model (and later a `StatEntry` model) linked to the existing `User` model |
+| Shared types | `packages/shared` | `Session`/stat types should live here so frontend and backend agree on shape, same pattern as the existing `User` type |
 | Auth | Not yet decided | MVP needs *some* login so sessions belong to a specific person — simplest real option is email + password with a hashed password column on `User` |
-| Mobile | `apps/mobile` (Expo) | Explicitly deferred — not touched until after web MVP works |
+| Mobile | `apps/mobile` (Expo) | Explicitly deferred — not touched until after frontend MVP works |
 
 Non-functional requirements for the MVP:
 - Logging a session should take under ~60 seconds end to end.

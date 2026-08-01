@@ -14,9 +14,9 @@ session, see it add up over time, know you're actually getting better.
 ## Stack
 
 - **Monorepo**: pnpm workspaces + Turborepo
-- **Web**: Next.js (TypeScript) — `apps/web`
+- **Frontend**: Next.js (TypeScript) — `apps/frontend`
 - **Mobile**: Expo / React Native (TypeScript) — `apps/mobile`
-- **API**: Node.js + Express + Prisma (TypeScript) — `apps/api`
+- **Backend**: Node.js + Express + Prisma (TypeScript) — `apps/backend`
 - **Database**: PostgreSQL
 - **Shared**: `packages/shared` — types shared across web, mobile, and API
 
@@ -31,8 +31,8 @@ session, see it add up over time, know you're actually getting better.
 ```bash
 pnpm install
 
-# Copy the API env template and fill in your local Postgres password
-cp apps/api/.env.example apps/api/.env
+# Copy the backend env template and fill in your local Postgres password
+cp apps/backend/.env.example apps/backend/.env
 
 # Create the database and run the first migration
 pnpm db:migrate
