@@ -12,4 +12,32 @@ model User {
   email     String   @unique
   name      String?
   createdAt DateTime @default(now())
+  sessions  Session[]
+  games     Game[]
+}
+
+model Session {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  date            DateTime
+  durationMinutes Int
+  statValue       Int?
+  notes           String?
+  createdAt       DateTime @default(now())
+}
+
+model Game {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  date          DateTime
+  opponent      String
+  teamScore     Int
+  opponentScore Int
+  goals         Int?
+  assists       Int?
+  minutesPlayed Int?
+  notes         String?
+  createdAt     DateTime @default(now())
 }
