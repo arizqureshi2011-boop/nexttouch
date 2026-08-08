@@ -1,6 +1,7 @@
 import "dotenv/config";
 import cors from "cors";
 import express, { type ErrorRequestHandler } from "express";
+import { authRouter } from "./routes/auth";
 import { usersRouter } from "./routes/users";
 
 const app = express();
@@ -13,6 +14,7 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
+app.use("/auth", authRouter);
 app.use("/users", usersRouter);
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
