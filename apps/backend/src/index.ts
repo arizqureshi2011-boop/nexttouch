@@ -1,4 +1,5 @@
 import "dotenv/config";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { type ErrorRequestHandler } from "express";
 import { authRouter } from "./routes/auth";
@@ -9,6 +10,7 @@ const port = process.env.PORT ?? 4000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
