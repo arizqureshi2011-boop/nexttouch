@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { Prisma } from "@prisma/client";
-import { Router } from "express";
+import { Router, type Response } from "express";
 import { z } from "zod";
 import { signToken } from "../lib/jwt";
 import { requireAuth } from "../middleware/requireAuth";
@@ -12,6 +12,15 @@ export const authRouter = Router();
 const SALT_ROUNDS = 10;
 const COOKIE_NAME = "token";
 const COOKIE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+
+function logUserIn(res: Response, userId: string) {
+  const token = signToken(userId);
+  res.cookie(COOKIE_NAME, token, {
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: COOKIE_MAX_AGE_MS,
+  });
+}
 
 const signupSchema = z.object({
   email: z.string().email(),
@@ -34,6 +43,7 @@ authRouter.post("/signup", async (req, res, next) => {
       data: { email, name, passwordHash },
       select: safeUserFields,
     });
+    logUserIn(res, user.id);
     res.status(201).json(user);
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === "P2002") {
@@ -67,12 +77,7 @@ authRouter.post("/login", async (req, res, next) => {
       return;
     }
 
-    const token = signToken(user.id);
-    res.cookie(COOKIE_NAME, token, {
-      httpOnly: true,
-      sameSite: "lax",
-      maxAge: COOKIE_MAX_AGE_MS,
-    });
+    logUserIn(res, user.id);
     res.json({ id: user.id, email: user.email, name: user.name, createdAt: user.createdAt });
   } catch (err) {
     next(err);

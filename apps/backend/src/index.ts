@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { type ErrorRequestHandler } from "express";
 import { authRouter } from "./routes/auth";
+import { gamesRouter } from "./routes/games";
+import { sessionsRouter } from "./routes/sessions";
 import { usersRouter } from "./routes/users";
 
 const app = express();
@@ -18,6 +20,8 @@ app.get("/health", (_req, res) => {
 
 app.use("/auth", authRouter);
 app.use("/users", usersRouter);
+app.use("/sessions", sessionsRouter);
+app.use("/games", gamesRouter);
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   console.error(err);
