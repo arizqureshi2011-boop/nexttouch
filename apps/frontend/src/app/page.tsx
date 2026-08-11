@@ -1,66 +1,52 @@
 import Image from "next/image";
+import AuthCard from "./AuthCard";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/soccer-ball.svg"
-          alt="Soccer ball logo"
-          width={64}
-          height={64}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      <nav className={styles.nav}>
+        <div className={styles.navBrand}>
+          <Image src="/soccer-ball.svg" alt="" width={28} height={28} />
+          NextTouch
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <a href="#auth" className={styles.getStarted}>
+          Get Started
+        </a>
+      </nav>
+
+      <section className={styles.hero}>
+        <h1>NextTouch</h1>
+        <p className={styles.tagline}>Analyze. Improve. Elevate.</p>
+        <p className={styles.heroText}>
+          Track your training. Track your games. See your progress add up
+          over time instead of just hoping you&apos;re getting better.
+        </p>
+      </section>
+
+      <section className={styles.howItWorks}>
+        <div className={styles.step}>
+          <div className={styles.stepNumber}>1</div>
+          <div className={styles.stepTitle}>Log it</div>
+          <div className={styles.stepText}>Training sessions and games</div>
         </div>
-      </main>
+        <div className={styles.step}>
+          <div className={styles.stepNumber}>2</div>
+          <div className={styles.stepTitle}>Track it</div>
+          <div className={styles.stepText}>History and progress charts</div>
+        </div>
+        <div className={styles.step}>
+          <div className={styles.stepNumber}>3</div>
+          <div className={styles.stepTitle}>Improve</div>
+          <div className={styles.stepText}>See real growth over time</div>
+        </div>
+      </section>
+
+      <section id="auth" className={styles.authSection}>
+        <AuthCard />
+      </section>
+
+      <footer className={styles.footer}>© 2026 NextTouch</footer>
     </div>
   );
 }
